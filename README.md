@@ -1,8 +1,8 @@
 # Alice 
 
-[![Build Status](https://travis-ci.org/justinas/alice.svg?branch=master)](https://travis-ci.org/justinas/alice)
+[![Build Status](https://travis-ci.org/nowk/alice.svg?branch=master)](https://travis-ci.org/nowk/alice)
 
-Alice provides a convenient way to chain 
+This is a fork of Alice, which provides a convenient way to chain 
 your HTTP middleware functions and the app handler.
 
 In short, it transforms
