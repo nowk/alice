@@ -111,5 +111,21 @@ func TestNextAddsAnotherConstructorToExistingChain(t *testing.T) {
 	chain.Next(tagMiddleware("t4\n"), tagMiddleware("t5\n"))
 	chain.Next(tagMiddleware("t6\n"))
 
+	newChain := chain.Append(tagMiddleware("t7\n"))
+	newChain.Next(tagMiddleware("t8\n"))
+
 	assert.Equal(t, len(chain.constructors), 6)
+	assert.Equal(t, len(newChain.constructors), 8)
+
+	chained := chain.Then(testApp)
+	w := httptest.NewRecorder()
+
+	r, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	chained.ServeHTTP(w, r)
+
+	assert.Equal(t, w.Body.String(), "t1\nt2\nt3\nt4\nt5\nt6\napp\n")
 }
