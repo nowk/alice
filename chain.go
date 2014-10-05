@@ -92,3 +92,9 @@ func (c Chain) Append(constructors ...Constructor) Chain {
 	newChain := New(newCons...)
 	return newChain
 }
+
+// Next adds a contructor(s) to the *existing* constructors collection.
+// Not to be confused with `Append` which returns a new Chain
+func (c *Chain) Next(constructor ...Constructor) {
+	c.constructors = append(c.constructors, constructor...)
+}
