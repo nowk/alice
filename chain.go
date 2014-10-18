@@ -93,8 +93,8 @@ func (c Chain) Append(constructors ...Constructor) Chain {
 	return newChain
 }
 
-// Next adds a contructor(s) to the *existing* constructors collection.
+// Use adds a contructor(s) to the *existing* constructors collection.
 // Not to be confused with `Append` which returns a new Chain
-func (c *Chain) Next(constructor ...Constructor) {
+func (c *Chain) Use(constructor ...Constructor) {
 	c.constructors = append(c.constructors, constructor...)
 }

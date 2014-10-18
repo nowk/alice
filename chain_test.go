@@ -105,14 +105,14 @@ func TestAppendRespectsImmutability(t *testing.T) {
 	assert.NotEqual(t, &chain.constructors[0], &newChain.constructors[0])
 }
 
-func TestNextAddsAnotherConstructorToExistingChain(t *testing.T) {
+func TestUseAddsAnotherConstructorToExistingChain(t *testing.T) {
 	chain := New(tagMiddleware("t1\n"), tagMiddleware("t2\n"))
-	chain.Next(tagMiddleware("t3\n"))
-	chain.Next(tagMiddleware("t4\n"), tagMiddleware("t5\n"))
-	chain.Next(tagMiddleware("t6\n"))
+	chain.Use(tagMiddleware("t3\n"))
+	chain.Use(tagMiddleware("t4\n"), tagMiddleware("t5\n"))
+	chain.Use(tagMiddleware("t6\n"))
 
 	newChain := chain.Append(tagMiddleware("t7\n"))
-	newChain.Next(tagMiddleware("t8\n"))
+	newChain.Use(tagMiddleware("t8\n"))
 
 	assert.Equal(t, len(chain.constructors), 6)
 	assert.Equal(t, len(newChain.constructors), 8)
